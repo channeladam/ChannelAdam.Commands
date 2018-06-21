@@ -9,6 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{763A0BD5-AD6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviourSpecs", "src\BehaviourSpecs\BehaviourSpecs.csproj", "{72104BD1-9297-4E2D-A664-CC39E23E8517}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{30364538-FBF7-4464-BE11-E295268F2E3E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		GitVersion.yml = GitVersion.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +37,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{47968356-250B-4715-8379-0B6DB6D5A88D} = {763A0BD5-AD68-46E1-89AA-19C6D1DA8093}
 		{72104BD1-9297-4E2D-A664-CC39E23E8517} = {763A0BD5-AD68-46E1-89AA-19C6D1DA8093}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6458CCE2-AC94-4B9D-B5F2-61564888E707}
 	EndGlobalSection
 EndGlobal
