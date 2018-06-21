@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>A .NET library implementation of the Command Pattern - including reversible commands.</Description>
+    <PackageIconUrl>https://devzone.channeladam.com/img/channeladam/channeladam-logo.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/channeladam/ChannelAdam.Commands</RepositoryUrl>
+    <Authors>Adam Craven</Authors>
+    <Company />
+    <Product>ChannelAdam.Commands</Product>
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <Copyright>Copyright 2017-2018 Adam Craven</Copyright>
+    <PackageTags>ChannelAdam,Commands,Reversible</PackageTags>
+    <PackageProjectUrl>https://github.com/channeladam/ChannelAdam.Commands</PackageProjectUrl>
+    <PackageReleaseNotes>2.0.0 - Refactored out of ChannelAdam.Core, target .NET Standard 1.1, no strong name signing</PackageReleaseNotes>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Version>0.0.0</Version>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+</Project>
