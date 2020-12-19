@@ -1,5 +1,5 @@
 ﻿using ChannelAdam.Commands;
-using ChannelAdam.TestFramework.MSTestV2.Abstractions;
+using ChannelAdam.TestFramework.Xunit.Abstractions;
 using TechTalk.SpecFlow;
 
 namespace BehaviourSpecs
@@ -8,10 +8,14 @@ namespace BehaviourSpecs
     [Scope(Feature = "Commanding")]
     public class CommandingUnitSteps : MoqTestFixture
     {
-        ClassWithProperty testObject;
-        ReversibleCommandManager commandManager;
+        private ClassWithProperty testObject;
+        private ReversibleCommandManager commandManager;
 
-        [Given(@"an initial state to perform commands on")]
+        protected CommandingUnitSteps(Xunit.Abstractions.ITestOutputHelper output) : base(output)
+        {
+        }
+
+        [Given("an initial state to perform commands on")]
         public void GivenAnInitialStateToPerformCommandsOn()
         {
             this.testObject = new ClassWithProperty
@@ -23,7 +27,7 @@ namespace BehaviourSpecs
             this.commandManager = new ReversibleCommandManager();
         }
 
-        [When(@"a series of commands are executed")]
+        [When("a series of commands are executed")]
         public void WhenASeriesOfCommandsAreExecuted()
         {
             this.commandManager.ExecuteSetPropertyCommand(this.testObject, p => p.MyProperty, 100);
@@ -33,7 +37,7 @@ namespace BehaviourSpecs
             LogAssert.AreEqual("MyProperty after set property command", 200, this.testObject.MyProperty);
         }
 
-        [When(@"all the commands are undone")]
+        [When("all the commands are undone")]
         public void WhenAllTheCommandsAreUndone()
         {
             this.commandManager.UndoPreviousCommand();
@@ -42,7 +46,7 @@ namespace BehaviourSpecs
             this.commandManager.UndoPreviousCommand();
         }
 
-        [Then(@"the initial state is restored")]
+        [Then("the initial state is restored")]
         public void ThenTheInitialStateIsRestored()
         {
             LogAssert.AreEqual("MyProperty after undo #2", 1, this.testObject.MyProperty);

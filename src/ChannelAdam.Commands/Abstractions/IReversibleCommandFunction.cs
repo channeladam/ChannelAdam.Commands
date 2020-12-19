@@ -21,7 +21,7 @@ namespace ChannelAdam.Commands.Abstractions
     {
         #region Public Methods
 
-        new TCommandResult Undo();
+        new TCommandResult? Undo();
 
         #endregion Public Methods
     }

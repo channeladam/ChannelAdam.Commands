@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ReversibleCommandFunctionBase.cs">
-//     Copyright (c) 2017 Adam Craven. All rights reserved.
+//     Copyright (c) 2017-2020 Adam Craven. All rights reserved.
 // </copyright>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,14 +23,14 @@ namespace ChannelAdam.Commands.Abstractions
     {
         #region Public Methods
 
-        public TCommandResult Undo()
+        public TCommandResult? Undo()
         {
             if (this.CanUndo())
             {
                 return this.UndoCore();
             }
 
-            return default(TCommandResult);
+            return default;
         }
 
         void IReversibleCommand.Undo()
@@ -47,7 +47,7 @@ namespace ChannelAdam.Commands.Abstractions
             return true;
         }
 
-        protected abstract TCommandResult UndoCore();
+        protected abstract TCommandResult? UndoCore();
 
         #endregion Protected Methods
     }

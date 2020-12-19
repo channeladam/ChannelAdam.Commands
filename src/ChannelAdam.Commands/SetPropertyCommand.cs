@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="SetPropertyCommand.cs">
-//     Copyright (c) 2017 Adam Craven. All rights reserved.
+//     Copyright (c) 2017-2020 Adam Craven. All rights reserved.
 // </copyright>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,24 +35,14 @@ namespace ChannelAdam.Commands
             this.NewValue = original.NewValue;
         }
 
-        public SetPropertyCommand(object target, PropertyInfo property, object newValue)
+        public SetPropertyCommand(object target, PropertyInfo property, object? newValue)
         {
-            if (target == null)
-            {
-                throw new ArgumentNullException(nameof(target));
-            }
-
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
-
-            this.Object = target;
-            this.Property = property;
+            this.Object = target ?? throw new ArgumentNullException(nameof(target));
+            this.Property = property ?? throw new ArgumentNullException(nameof(property));
             this.NewValue = newValue;
         }
 
-        public object NewValue { get; set; }
+        public object? NewValue { get; set; }
 
         public object Object { get; set; }
 
@@ -60,11 +50,7 @@ namespace ChannelAdam.Commands
 
         protected override void ExecuteCore()
         {
-#if NET40 || NET45
-            this.Property.SetValue(this.Object, this.NewValue, BindingFlags.SetProperty | BindingFlags.Public, null, null, null);
-#else
             this.Property.SetValue(this.Object, this.NewValue, null);
-#endif
         }
     }
 }

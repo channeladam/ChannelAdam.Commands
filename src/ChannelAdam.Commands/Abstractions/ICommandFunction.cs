@@ -21,7 +21,7 @@ namespace ChannelAdam.Commands.Abstractions
     {
         #region Public Methods
 
-        new TCommandResult Execute();
+        new TCommandResult? Execute();
 
         #endregion Public Methods
     }

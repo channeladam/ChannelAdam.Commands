@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="CommandFunctionBase.cs">
-//     Copyright (c) 2017 Adam Craven. All rights reserved.
+//     Copyright (c) 2017-2020 Adam Craven. All rights reserved.
 // </copyright>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,14 +21,14 @@ namespace ChannelAdam.Commands.Abstractions
     {
         #region Public Methods
 
-        public TCommandResult Execute()
+        public TCommandResult? Execute()
         {
             if (this.CanExecute())
             {
                 return this.ExecuteCore();
             }
 
-            return default(TCommandResult);
+            return default;
         }
 
         void ICommand.Execute()
@@ -45,7 +45,7 @@ namespace ChannelAdam.Commands.Abstractions
             return true;
         }
 
-        protected abstract TCommandResult ExecuteCore();
+        protected abstract TCommandResult? ExecuteCore();
 
         #endregion Protected Methods
     }

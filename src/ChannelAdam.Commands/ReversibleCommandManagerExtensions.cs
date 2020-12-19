@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ReversibleCommandManagerExtensions.cs">
-//     Copyright (c) 2017 Adam Craven. All rights reserved.
+//     Copyright (c) 2017-2020 Adam Craven. All rights reserved.
 // </copyright>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,16 +25,21 @@ namespace ChannelAdam.Commands
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Not in this case.")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Not in this case.")]
-        public static void ExecuteSetPropertyCommand<TTarget, TValue>(this ReversibleCommandManager commandManager, TTarget target, Expression<Func<TTarget, TValue>> propertyExpression, TValue valueToSet)
+        public static void ExecuteSetPropertyCommand<TTarget, TValue>(this ReversibleCommandManager commandManager, TTarget target, Expression<Func<TTarget, TValue>> propertyExpression, TValue? valueToSet)
         {
-            if (propertyExpression == null)
-            {
-                throw new ArgumentNullException(nameof(propertyExpression));
-            }
-
             if (commandManager == null)
             {
                 throw new ArgumentNullException(nameof(commandManager));
+            }
+
+            if (target == null)
+            {
+                throw new ArgumentNullException(nameof(target));
+            }
+
+            if (propertyExpression == null)
+            {
+                throw new ArgumentNullException(nameof(propertyExpression));
             }
 
             var memberExpression = propertyExpression.Body as MemberExpression;

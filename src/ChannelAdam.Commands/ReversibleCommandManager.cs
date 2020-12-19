@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ReversibleCommandManager.cs">
-//     Copyright (c) 2016 Adam Craven. All rights reserved.
+//     Copyright (c) 2016-2020 Adam Craven. All rights reserved.
 // </copyright>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,21 +26,15 @@ namespace ChannelAdam.Commands
     {
         #region Private Fields
 
-        private ConcurrentStack<IReversibleCommand> undoCommandStack = new ConcurrentStack<IReversibleCommand>();
+        private readonly ConcurrentStack<IReversibleCommand> undoCommandStack = new();
 
         #endregion Private Fields
 
         #region Public Properties
 
-        public int CountOfCommandsToUndo
-        {
-            get { return this.undoCommandStack.Count; }
-        }
+        public int CountOfCommandsToUndo => this.undoCommandStack.Count;
 
-        public bool HasCommandsToUndo
-        {
-            get { return this.undoCommandStack.Count > 0; }
-        }
+        public bool HasCommandsToUndo => !undoCommandStack.IsEmpty;
 
         #endregion Public Properties
 
@@ -63,7 +57,7 @@ namespace ChannelAdam.Commands
             this.undoCommandStack.Push(command);
         }
 
-        public TCommandResult ExecuteCommandFunction<TCommandResult>(IReversibleCommandFunction<TCommandResult> command)
+        public TCommandResult? ExecuteCommandFunction<TCommandResult>(IReversibleCommandFunction<TCommandResult> command)
         {
             if (command == null)
             {
@@ -79,7 +73,7 @@ namespace ChannelAdam.Commands
 
         public void UndoAllCommands()
         {
-            while (this.undoCommandStack.Count > 0)
+            while (!undoCommandStack.IsEmpty)
             {
                 this.UndoPreviousCommand();
             }
@@ -87,13 +81,11 @@ namespace ChannelAdam.Commands
 
         public void UndoPreviousCommand()
         {
-            IReversibleCommand cmd = null;
-
-            if (this.undoCommandStack.TryPeek(out cmd))
+            if (this.undoCommandStack.TryPeek(out IReversibleCommand? cmd))
             {
                 cmd.Undo();
 
-                this.undoCommandStack.TryPop(out cmd);
+                this.undoCommandStack.TryPop(out _);
             }
         }
 

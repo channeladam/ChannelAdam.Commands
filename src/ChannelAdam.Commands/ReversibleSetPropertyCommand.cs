@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="ReversibleSetPropertyCommand.cs">
-//     Copyright (c) 2017 Adam Craven. All rights reserved.
+//     Copyright (c) 2017-2020 Adam Craven. All rights reserved.
 // </copyright>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,8 +25,8 @@ namespace ChannelAdam.Commands
     {
         #region Private Fields
 
-        private SetPropertyCommand setPropertyCommand;
-        private SetPropertyCommand undoSetPropertyCommand;
+        private readonly SetPropertyCommand setPropertyCommand;
+        private SetPropertyCommand? undoSetPropertyCommand;
 
         #endregion Private Fields
 
@@ -34,15 +34,10 @@ namespace ChannelAdam.Commands
 
         public ReversibleSetPropertyCommand(SetPropertyCommand setPropertyCommand)
         {
-            if (setPropertyCommand == null)
-            {
-                throw new ArgumentNullException(nameof(setPropertyCommand));
-            }
-
-            this.setPropertyCommand = setPropertyCommand;
+            this.setPropertyCommand = setPropertyCommand ?? throw new ArgumentNullException(nameof(setPropertyCommand));
         }
 
-        public ReversibleSetPropertyCommand(object target, PropertyInfo property, object newValue)
+        public ReversibleSetPropertyCommand(object target, PropertyInfo property, object? newValue)
         {
             this.setPropertyCommand = new SetPropertyCommand(target, property, newValue);
         }
@@ -69,14 +64,10 @@ namespace ChannelAdam.Commands
 
         private void CreateUndoSetPropertyCommand()
         {
-#if NET40 || NET45
-            var previousValue = this.setPropertyCommand.Property.GetValue(this.setPropertyCommand.Object, BindingFlags.GetProperty | BindingFlags.Public, null, null, null);
-#else
             var previousValue = this.setPropertyCommand.Property.GetValue(this.setPropertyCommand.Object, null);
-#endif
             this.undoSetPropertyCommand = new SetPropertyCommand(this.setPropertyCommand.Object, this.setPropertyCommand.Property, previousValue);
         }
 
-#endregion Private Methods
+        #endregion Private Methods
     }
 }
