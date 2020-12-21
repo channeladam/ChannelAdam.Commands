@@ -1,5 +1,5 @@
 ﻿using ChannelAdam.Commands;
-using ChannelAdam.TestFramework.Xunit.Abstractions;
+using ChannelAdam.TestFramework.NUnit.Abstractions;
 using TechTalk.SpecFlow;
 
 namespace BehaviourSpecs
@@ -10,10 +10,6 @@ namespace BehaviourSpecs
     {
         private ClassWithProperty testObject;
         private ReversibleCommandManager commandManager;
-
-        protected CommandingUnitSteps(Xunit.Abstractions.ITestOutputHelper output) : base(output)
-        {
-        }
 
         [Given("an initial state to perform commands on")]
         public void GivenAnInitialStateToPerformCommandsOn()
