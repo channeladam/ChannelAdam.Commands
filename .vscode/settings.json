@@ -1,4 +1,3 @@
 {
-    "dotnet-test-explorer.testProjectPath": "**/BehaviourSpecs/*",
     "cucumberautocomplete.steps": ["**/BehaviourSpecs/*"]
 }
